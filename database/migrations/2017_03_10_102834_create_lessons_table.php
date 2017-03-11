@@ -17,7 +17,7 @@ class CreateLessonsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('courseident');
-            $table->string('shortnme');
+            $table->string('shortname');
             $table->string('professor');
             $table->string('classname');
             $table->integer('dayofweek');

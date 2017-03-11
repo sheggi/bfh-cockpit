@@ -14,6 +14,6 @@ class Lesson extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'corseident', 'shortname', 'professor', 'classname', 'dayofweek', 'start', 'end', 'place', 'room', 'links'];
+    protected $fillable = ['name', 'courseident', 'shortname', 'professor', 'classname', 'dayofweek', 'start', 'end', 'place', 'room', 'links'];
 
 }
