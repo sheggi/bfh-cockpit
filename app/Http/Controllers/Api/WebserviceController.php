@@ -1,15 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Lesson;
 use Illuminate\Support\Facades\Auth;
 
 class WebserviceController extends Controller
 {
-    //
-
+    /**
+     * fetch all lessons from the bfh webservice
+     *
+     * @return Response
+     */
     public function fetch(){
         if (Auth::id() === 1) {
             $url = 'https://mybfh.bfh.ch/webservice/?action=get_tt_entries&flat&_dc=' . time();

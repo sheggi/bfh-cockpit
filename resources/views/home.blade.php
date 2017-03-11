@@ -11,6 +11,19 @@
                     You are logged in!
                 </div>
             </div>
+            @if (Auth::id() === 1)
+            <div class="panel panel-default">
+                <div class="panel-heading">Tools</div>
+
+                <div class="panel-body">
+                    <ul>
+                        <li>
+                            <a href="/api/v0/webservice_fetch?api_token={{ Auth::user()->api_token }}">Fetch from Webservice</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 </div>

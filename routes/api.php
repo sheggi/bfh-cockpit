@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('lessons', 'LessonController',
+Route::resource('lessons', 'Api\LessonController',
     ['only' => ['index', 'show']]);
 
-Route::middleware('auth:api')->get('/webservice_fetch','WebserviceController@fetch');
+Route::middleware('auth:api')->get('/webservice_fetch','Api\WebserviceController@fetch');
