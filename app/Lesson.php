@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {
-    //
+    /**
+     * default values
+     */
+    protected $attributes = [
+      'links' => ''
+    ];
 
 
     /**
