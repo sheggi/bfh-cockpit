@@ -15,7 +15,7 @@ class LessonController extends Controller
      */
     public function index()
     {
-        return response()->json(['data' => Lesson::all()]);
+        return response()->json(['data' => Lesson::where('classname', 'I2q')->get()]);
     }
 
     /**

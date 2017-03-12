@@ -228,4 +228,15 @@ return [
 
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Frontend Base API URL
+    |--------------------------------------------------------------------------
+    |
+    | This path is used in the frontend to provide the BaseURL to the app API
+    |
+    */
+
+    'api' => env('FRONTEND_API', '/api'),
+
 ];

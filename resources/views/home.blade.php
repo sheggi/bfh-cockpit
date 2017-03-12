@@ -18,7 +18,7 @@
                 <div class="panel-body">
                     <ul>
                         <li>
-                            <a href="/api/v0/webservice_fetch?api_token={{ Auth::user()->api_token }}">Fetch from Webservice</a>
+                            <a href="{{ url('/api/v0/webservice_fetch') }}?api_token={{ Auth::user()->api_token }}">Fetch from Webservice</a>
                         </li>
                     </ul>
                 </div>
