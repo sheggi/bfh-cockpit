@@ -9,14 +9,14 @@
                     <span class="end">{{moment(lesson.end,'HH:mm:ss').format('HH:mm')}}</span>
                 </div>
                 <div class="col-xs-2">
-                    <h3 class="panel-title">{{lesson.shortname}}</h3>
+                    <h3 class="panel-title center-line">{{lesson.shortname}}</h3>
                 </div>
                 <div class="col-xs-7">
-                    <h3 class="panel-title">{{lesson.name}}</h3>
+                    <h3 class="panel-title center-line">{{lesson.name}}</h3>
                 </div>
                 <div class="col-xs-2">
                     <button class="btn btn-primary pull-right" v-show="isPassed" @click="hide">X</button>
-                    <h3 class="pull-right panel-title" v-show="isCurrent || isScheduled">{{lesson.room}}</h3>
+                    <h3 class="pull-right panel-title center-line" v-show="isCurrent || isScheduled">{{lesson.room}}</h3>
                 </div>
             </div>
             <div class="progress" v-show="isCurrent">
@@ -24,20 +24,10 @@
             </div>
         </div>
         <div class="panel-body panel-collapse" v-show="isOpen || isCurrent">
-            body
-            <!--
-            <el-tabs>
-                <el-tab-pane label="Generell">
-                    <h3>Links</h3>
-                    <vue-markdown>
-                        {{lesson.links}}
-                    </vue-markdown>
-                </el-tab-pane>
-                <el-tab-pane :label="lesson.courseident">
-                    <a :href="moduleLink">{{lesson.courseident}} Modulbeschreibung</a>
-                </el-tab-pane>
-                <el-tab-pane :label="lesson.professor">(leer)</el-tab-pane>
-            </el-tabs>-->
+            <ul>
+                <li><a :href="moduleLink">{{lesson.courseident}} Modulbeschreibung</a></li>
+            </ul>
+            <vue-markdown>{{lesson.links}}</vue-markdown>
         </div>
     </div>
 </template>
@@ -112,11 +102,8 @@
 
 
 <style>
-    .panel-header h2 {
-        margin: 0;
+    h3.panel-title.center-line {
+        margin-top: 12px;
     }
 
-    .pull-right {
-        float: right;
-    }
 </style>

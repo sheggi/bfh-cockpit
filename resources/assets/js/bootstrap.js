@@ -1,4 +1,4 @@
-/* global window, require */
+/* global window, require, Vue */
 
 window._ = require('lodash')
 
@@ -45,3 +45,26 @@ window.axios.defaults.headers.common = {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+
+/**
+ * Enable Vue Resource example this.$http.get(url).then()
+ */
+
+require('vue-resource')
+import VueMarkdown from 'vue-markdown'
+
+/**
+ * Register Components
+ */
+
+const Cockpit = require('./components/Cockpit.vue')
+const DebugPanel = require('./components/DebugPanel.vue')
+const LessonPanel = require('./components/LessonPanel.vue')
+const LessonsPanel = require('./components/LessonsPanel.vue')
+
+Vue.component('vue-markdown', VueMarkdown)
+Vue.component(Cockpit.name, Cockpit)
+Vue.component(DebugPanel.name, DebugPanel)
+Vue.component(LessonPanel.name, LessonPanel)
+Vue.component(LessonsPanel.name, LessonsPanel)

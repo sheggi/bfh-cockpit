@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <debug-panel :lessons="lessons" :time="time"></debug-panel>
                 <lessons-panel :lessons="lessons" :time="time"></lessons-panel>
+                <debug-panel :lessons="lessons" :time="time"></debug-panel>
             </div>
         </div>
     </div>

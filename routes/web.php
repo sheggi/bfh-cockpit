@@ -18,3 +18,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/setup', function () {
+    if (Config::get('app.env') === 'staging') {
+        return response()->json([
+//            'optimize' => Artisan::call('optimize'), // FIXME: can't be used without proc_open
+//            'route:cache' => Artisan::call('route:cache'), // FIXME: LogicException api/v0/user not serializable because of Closure
+            'cache:clear' => Artisan::call('cache:clear'),
+            'migrate' => Artisan::call('migrate')
+            ]);
+    } else {
+        abort(404);
+    }
+});
