@@ -33,22 +33,21 @@ window.axios.defaults.headers.common = {
   'X-Requested-With': 'XMLHttpRequest'
 }
 
+// /**
+//  * Echo exposes an expressive API for subscribing to channels and listening
+//  * for events that are broadcast by Laravel. Echo and event broadcasting
+//  * allows your team to easily build robust real-time web applications.
+//  */
+//
+// // import Echo from "laravel-echo"
+//
+// // window.Echo = new Echo({
+// //     broadcaster: 'pusher',
+// //     key: 'your-pusher-key'
+// // })
+
 /**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-// import Echo from "laravel-echo"
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'your-pusher-key'
-// });
-
-
-/**
- * Enable Vue Resource example this.$http.get(url).then()
+ * Enable Vue Resource
  */
 
 require('vue-resource')
@@ -62,9 +61,17 @@ const Cockpit = require('./components/Cockpit.vue')
 const DebugPanel = require('./components/DebugPanel.vue')
 const LessonPanel = require('./components/LessonPanel.vue')
 const LessonsPanel = require('./components/LessonsPanel.vue')
+const TodayPanel = require('./components/TodayPanel.vue')
+const NextDaysPanel = require('./components/NextDaysPanel.vue')
+const PageLoadPanel = require('./components/PageLoadPanel.vue')
+const PreviousDaysPanel = require('./components/PreviousDaysPanel.vue')
 
 Vue.component('vue-markdown', VueMarkdown)
 Vue.component(Cockpit.name, Cockpit)
 Vue.component(DebugPanel.name, DebugPanel)
 Vue.component(LessonPanel.name, LessonPanel)
 Vue.component(LessonsPanel.name, LessonsPanel)
+Vue.component(TodayPanel.name, TodayPanel)
+Vue.component(NextDaysPanel.name, NextDaysPanel)
+Vue.component(PageLoadPanel.name, PageLoadPanel)
+Vue.component(PreviousDaysPanel.name, PreviousDaysPanel)

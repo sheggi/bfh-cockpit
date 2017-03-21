@@ -1,7 +1,7 @@
 <!-- https://github.com/yuche/vue-strap/blob/master/src/Panel.vue -->
 
 <template>
-    <div class="panel panel-default lesson-panel" v-show="!hidden && lesson.dayofweek >= moment(time).day()">
+    <div class="panel panel-default lesson-panel" v-show="!hidden" v-bind:id="isCurrent?'now':''">
         <div class="panel-heading" @click="toggle()">
             <div class="row">
                 <div class="col-xs-1">

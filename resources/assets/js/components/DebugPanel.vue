@@ -1,5 +1,5 @@
 <template>
-    <div class="panel panel-default">
+    <div class="panel panel-default" v-show="authenticated">
         <div class="panel-heading">
             <h3 class="panel-title">Debug Panel</h3>
         </div>
@@ -25,6 +25,7 @@ First Lesson:
 
     data: function () {
       return {
+        authenticated: Laravel.authenticated
       }
     },
 

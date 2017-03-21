@@ -2,7 +2,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <lessons-panel :lessons="lessons" :time="time"></lessons-panel>
+                <previous-days-panel :lessons="lessons" :time="time"></previous-days-panel>
+                <page-load-panel :lessons="lessons" :time="time"></page-load-panel>
+                <today-panel :lessons="lessons" :time="time"></today-panel>
+                <next-days-panel :lessons="lessons" :time="time"></next-days-panel>
                 <debug-panel :lessons="lessons" :time="time"></debug-panel>
             </div>
         </div>
@@ -33,14 +36,18 @@
 
       setInterval(() => {
         this.time = moment().valueOf()
-      }, 1000)
+      }, 1000 * 15)
 
       this.$http.get(Laravel.api + '/lessons').then(response => {
         this.lessons = response.body.data;
         this.lessons = this.lessons || [];
-        this.lessons = this.lessons.filter((lesson) => {
-          return moment(this.time).day() <= lesson.dayofweek
-        });
+        // jump to now or today section
+        setTimeout(function () {
+          if ($('#now'))
+            location.href = '#now'
+          if ($('#today'))
+          location.href = '#today'
+        }, 0)
       }, response => {
         console.error('couldn\'t fetch lessons')
       })

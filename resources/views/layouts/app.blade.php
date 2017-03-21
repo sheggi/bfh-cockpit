@@ -18,6 +18,7 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
             'api' => url(config('app.api')),
+            'authenticated' => (Auth::id() > 0)
         ]) !!};
     </script>
 </head>
