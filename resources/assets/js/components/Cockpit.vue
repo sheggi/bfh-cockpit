@@ -46,7 +46,7 @@
           if ($('#now'))
             location.href = '#now'
           if ($('#today'))
-          location.href = '#today'
+            location.href = '#today'
         }, 0)
       }, response => {
         console.error('couldn\'t fetch lessons')

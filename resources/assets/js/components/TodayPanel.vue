@@ -1,15 +1,16 @@
 <template>
     <div>
-        <p class="lead" v-show="next_lessons.length" id="today">{{moment().calendar(null, day_formatting)}}</p>
+        <p class="lead" id="today">{{moment(this.time).calendar(null, day_formatting)}}</p>
+        <transport-panel :from="before" :to="here"></transport-panel>
         <lesson-panel v-for="lesson in next_lessons" :lesson="lesson" :time="time"></lesson-panel>
+        <transport-panel :from="here" :to="after"></transport-panel>
     </div>
 </template>
 
 
 <script>
   import moment from 'moment'
-
-  let focus = true;
+  import localstore from '../localstore'
 
   export default {
     name: 'today-panel',
@@ -25,13 +26,16 @@
           lastDay: '[Yesterday]',
           lastWeek: '[Last] dddd',
           sameElse: 'DD/MM/YYYY'
-        }
+        },
+        before: localstore.get('transport-before') || 8576646, // Bern Hauptbahnhof
+        here: localstore.get('transport-here') || 8576997, // Bern Markuskirche
+        after: localstore.get('transport-after') || 8576646, // Bern Hauptbahnhof
       }
     },
 
     computed: {
       next_lessons: function () {
-        const today = moment().day()
+        const today = moment(this.time).day()
         return this.lessons.filter((lesson) => {
           return lesson.dayofweek === today && moment(lesson.end, 'HH:mm:ss').day(lesson.dayofweek).isAfter(this.time)
         })

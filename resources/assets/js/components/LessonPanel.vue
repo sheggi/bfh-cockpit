@@ -1,7 +1,7 @@
 <!-- https://github.com/yuche/vue-strap/blob/master/src/Panel.vue -->
 
 <template>
-    <div class="panel panel-default lesson-panel" v-show="!hidden" v-bind:id="isCurrent?'now':''">
+    <div class="panel panel-default lesson-panel" v-bind:id="isCurrent?'now':''">
         <div class="panel-heading" @click="toggle()">
             <div class="row">
                 <div class="col-xs-1">
@@ -15,7 +15,7 @@
                     <h3 class="panel-title center-line">{{lesson.name}}</h3>
                 </div>
                 <div class="col-xs-2">
-                    <button class="btn btn-primary pull-right" v-show="isPassed" @click="hide">X</button>
+                    <h3 class="pull-right panel-title center-line" v-show="isPassed"><div class="label label-success"><i class="glyphicon glyphicon-ok"></i></div></h3>
                     <h3 class="pull-right panel-title center-line" v-show="isCurrent || isScheduled">{{lesson.room}}</h3>
                 </div>
             </div>
@@ -45,16 +45,11 @@
       return {
         isOpen: false,
         startTime: null,
-        endTime: null,
-        hidden: false
+        endTime: null
       }
     },
 
     methods: {
-      hide(){
-        this.hidden = true
-      },
-
       toggle() {
         this.isOpen = !this.isOpen
       },
@@ -90,10 +85,10 @@
 
     created() {
       const start = this.lesson.start.split(':');
-      this.startTime = moment(Date.now()).day(this.lesson.dayofweek).hours(start[0]).minutes(start[1]).seconds(start[2])
+      this.startTime = moment(this.time).day(this.lesson.dayofweek).hours(start[0]).minutes(start[1]).seconds(start[2])
 
       const end = this.lesson.end.split(':');
-      this.endTime = moment(Date.now()).day(this.lesson.dayofweek).hours(end[0]).minutes(end[1]).seconds(end[2])
+      this.endTime = moment(this.time).day(this.lesson.dayofweek).hours(end[0]).minutes(end[1]).seconds(end[2])
 
       this.isOpen = this.isCurrent
     }

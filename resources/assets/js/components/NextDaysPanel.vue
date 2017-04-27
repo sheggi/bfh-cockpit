@@ -40,7 +40,7 @@
       },
       days: function () {
         const days = [];
-        for (let i = moment().day()+1; i <= 6; i++)
+        for (let i = moment(this.time).day()+1; i <= 6; i++)
         {
           days.push(i);
         }

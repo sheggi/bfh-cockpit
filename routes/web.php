@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('app');
 });
+Route::get('/config', function () {
+    return view('config');
+});
 
 Auth::routes();
 
