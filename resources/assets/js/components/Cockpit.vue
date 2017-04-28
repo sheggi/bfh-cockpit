@@ -35,7 +35,7 @@
     created: function () {
 
       setInterval(() => {
-        this.time = moment().valueOf()
+        this.time = Date.now()
       }, 1000 * 15)
 
       this.$http.get(Laravel.api + '/lessons').then(response => {

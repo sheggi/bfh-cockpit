@@ -49,6 +49,16 @@
       }
     },
 
+    watch: {
+      isCurrent: function (val) {
+        if (val) {
+          setTimeout(function () {
+            location.href = '#now'
+          }, 100)
+        }
+      }
+    },
+    
     methods: {
       toggle() {
         this.isOpen = !this.isOpen
@@ -65,13 +75,13 @@
 
     computed: {
       isCurrent(){
-        return this.startTime.isBefore(this.time) && this.endTime.isAfter(this.time)
+        return this.startTime === null ? false : this.startTime.isBefore(this.time) && this.endTime.isAfter(this.time)
       },
       isScheduled(){
-        return this.startTime.isAfter(this.time)
+        return this.startTime === null ? false : this.startTime.isAfter(this.time)
       },
       isPassed(){
-        return this.endTime.isBefore(this.time)
+        return this.endTime === null ? false : this.endTime.isBefore(this.time)
       },
       moduleLink(){
         return 'https://www.ti.bfh.ch/fileadmin/modules/' + this.lesson.courseident.replace(/[a-z]*$/i,'') + '-de.xml'

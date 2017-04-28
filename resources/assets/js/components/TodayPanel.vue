@@ -2,7 +2,7 @@
     <div>
         <p class="lead" id="today">{{moment(this.time).calendar(null, day_formatting)}}</p>
         <transport-panel :from="before" :to="here"></transport-panel>
-        <lesson-panel v-for="lesson in next_lessons" :lesson="lesson" :time="time"></lesson-panel>
+        <lesson-panel v-for="lesson in today_lessons" :lesson="lesson" :time="time"></lesson-panel>
         <transport-panel :from="here" :to="after"></transport-panel>
     </div>
 </template>
@@ -34,10 +34,10 @@
     },
 
     computed: {
-      next_lessons: function () {
+      today_lessons: function () {
         const today = moment(this.time).day()
         return this.lessons.filter((lesson) => {
-          return lesson.dayofweek === today && moment(lesson.end, 'HH:mm:ss').day(lesson.dayofweek).isAfter(this.time)
+          return lesson.dayofweek === today
         })
       }
     },
