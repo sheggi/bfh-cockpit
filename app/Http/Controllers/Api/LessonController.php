@@ -13,9 +13,30 @@ class LessonController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(['data' => Lesson::where('classname', 'I2q')->get()]);
+        if($request->all()) {
+            $includeClasses = explode(',', $request->get('include_classes'));
+            $includeModules = explode(',', $request->get('include_modules'));
+            $excludeModules = explode(',', $request->get('exclude_modules'));
+            $data = [];
+            foreach ($includeClasses as $cl) {
+                $data = array_merge($data, Lesson::where('classname', $cl)->get()->toArray());
+            }
+            foreach ($includeModules as $mod) {
+                $data = array_merge($data, Lesson::where('courseident', $mod)->get()->toArray());
+            }
+
+            $data = array_filter($data,
+                function ($module) use ($excludeModules) {
+                    return !in_array($module['courseident'], $excludeModules);
+                });
+
+            return response()->json(['data' => $data]);
+        }
+        else {
+            return response()->json(['data' => Lesson::all()]);
+        }
     }
 
     /**
