@@ -9,14 +9,43 @@
                     <div class="panel-body">
                         <p>Die Einstellungen werden im LocalStore gespeichert</p>
                         <div class="alert alert-danger" v-if="!feature_localstore">LocalStore wird im Browser nicht unterstützt!</div>
-                        <h4>Transport Panel</h4>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Stundenplan Einstellungen</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Hier stellst du dein Stundenplan zusammen</p>
+                        <div class="form-group">
+                            <label>Klasse wählen</label>
+                            <multiselect v-model="include_classes" :options="classes" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
+                        </div>
+                        <div class="form-group">
+                            <label>Einzelne Module hinzufügen</label>
+                            <multiselect v-model="include_modules" :options="modules" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
+                        </div>
+                        <div class="form-group">
+                            <label>Einzelne Module ausschliessen</label>
+                            <multiselect v-model="exclude_modules" :options="modules" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Fahrplan Einstellungen</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Die Ausgangsorte und Bestimmungsorte können eingestellt werden. Der Fahrplan zeigt dir dann jeweils die nächsten verfügbaren Verbindungen von den eingestellten Orten.</p>
                         <div class="form-group">
                             <label>Fahrplan anzeigen</label>
                             <button type="button" v-on:click="toggle_transport" :class="transport_hide?'btn btn-danger':'btn btn-success'">toggle</button>
                         </div>
                         <div v-if="!transport_hide">
                             <div class="form-group">
-                                <label>Bevor Stunden</label>
+                                <label>Von diesem Ort zum Studiums Ort</label>
                                 <input v-model="transport_before" class="form-control" placeholder="Bern Hauptbahnhof"/>
                             </div>
                             <div class="form-group">
@@ -24,7 +53,7 @@
                                 <input v-model="transport_here" class="form-control" placeholder="Bern, Wankdorffeldstrasse 102"/>
                             </div>
                             <div class="form-group">
-                                <label>Nach Stunden</label>
+                                <label>Nach dem Studium zu diesem Ort</label>
                                 <input v-model="transport_after" class="form-control" placeholder="Bern Hauptbahnhof"/>
                             </div>
                         </div>
@@ -46,7 +75,9 @@
     data: function () {
       return {
         feature_localstore: localstore.supported(),
-        transport_hide: localstore.get('transport-hide') == 'true'
+        transport_hide: localstore.get('transport-hide') === 'true',
+        classes: ['I2q', 'I2p'],
+        modules: []
       }
     },
 
@@ -70,6 +101,18 @@
       transport_after: {
         get: localstore.get.bind(this, 'transport-after'),
         set: localstore.set.bind(this, 'transport-after')
+      },
+      include_classes: {
+        get: localstore.get.bind(this, 'include-classes'),
+        set: localstore.set.bind(this, 'include-classes')
+      },
+      include_modules: {
+        get: localstore.get.bind(this, 'include-modules'),
+        set: localstore.set.bind(this, 'include-modules')
+      },
+      exclude_modules: {
+        get: localstore.get.bind(this, 'exclude-modules'),
+        set: localstore.set.bind(this, 'exclude-modules')
       },
     }
   }

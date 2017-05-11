@@ -52,6 +52,7 @@ window.axios.defaults.headers.common = {
 
 require('vue-resource')
 import VueMarkdown from 'vue-markdown'
+import Multiselect from 'vue-multiselect'
 
 /**
  * Register Components
@@ -69,6 +70,7 @@ const TransportPanel = require('./components/TransportPanel.vue')
 const Config = require('./components/Config.vue')
 
 Vue.component('vue-markdown', VueMarkdown)
+Vue.component('multiselect', Multiselect)
 Vue.component(Cockpit.name, Cockpit)
 Vue.component(DebugPanel.name, DebugPanel)
 Vue.component(LessonPanel.name, LessonPanel)

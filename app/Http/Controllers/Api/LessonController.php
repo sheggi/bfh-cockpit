@@ -27,10 +27,10 @@ class LessonController extends Controller
                 $data = array_merge($data, Lesson::where('courseident', $mod)->get()->toArray());
             }
 
-            $data = array_filter($data,
+            $data = array_values(array_filter($data,
                 function ($module) use ($excludeModules) {
                     return !in_array($module['courseident'], $excludeModules);
-                });
+                }));
 
             return response()->json(['data' => $data]);
         }
