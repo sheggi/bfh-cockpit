@@ -1,3 +1,4 @@
+/* global localStorage */
 const prefix = 'bfhcockpit:'
 
 function supported () {
@@ -17,7 +18,25 @@ export default  {
     if (supported()) {
       return localStorage.getItem(prefix + key)
     }
-    return
+  },
+
+  setJSON: function (key, value) {
+    if (supported()) {
+      localStorage.setItem(prefix + key, JSON.stringify(value))
+      return true
+    }
+    return false
+  },
+
+  getJSON: function (key) {
+    if (supported()) {
+      const valueString = localStorage.getItem(prefix + key)
+      try {
+        return JSON.parse(valueString)
+      } catch (err) {
+        // gracefully
+      }
+    }
   },
 
   supported

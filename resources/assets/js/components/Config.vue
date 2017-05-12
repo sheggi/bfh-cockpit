@@ -20,15 +20,15 @@
                         <p>Hier stellst du dein Stundenplan zusammen</p>
                         <div class="form-group">
                             <label>Klasse wählen</label>
-                            <multiselect v-model="include_classes" :options="classes" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
+                            <multiselect v-model="include_classes" :options="classes" track-by="classname" label="classname" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
                         </div>
                         <div class="form-group">
                             <label>Einzelne Module hinzufügen</label>
-                            <multiselect v-model="include_modules" :options="modules" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
+                            <multiselect v-model="include_modules" :options="modules" track-by="courseident" label="name" :custom-label="customModulLabel" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
                         </div>
                         <div class="form-group">
                             <label>Einzelne Module ausschliessen</label>
-                            <multiselect v-model="exclude_modules" :options="modules" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
+                            <multiselect v-model="exclude_modules" :options="modules" track-by="courseident" label="name" :custom-label="customModulLabel" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
                         </div>
                     </div>
                 </div>
@@ -68,6 +68,7 @@
 <script>
   import moment from 'moment'
   import localstore from '../localstore'
+  import bfhcockpitApi from '../bfhcockpit_api'
 
   export default {
     name: 'config',
@@ -76,9 +77,21 @@
       return {
         feature_localstore: localstore.supported(),
         transport_hide: localstore.get('transport-hide') === 'true',
-        classes: ['I2q', 'I2p'],
+        classes: [],
         modules: []
       }
+    },
+
+    created: function () {
+      bfhcockpitApi.classes().then(classes => {
+        this.classes = classes
+        this.$forceUpdate()
+      })
+
+      bfhcockpitApi.modules().then(modules => {
+        this.modules = modules
+        this.$forceUpdate()
+      })
     },
 
     methods: {
@@ -86,6 +99,10 @@
         this.transport_hide = !this.transport_hide
         localstore.set('transport-hide',this.transport_hide)
         this.$forceUpdate()
+      },
+      
+      customModulLabel: function (obj) {
+        return `${obj.courseident} – ${obj.shortname} - ${obj.name}`
       }
     },
 
@@ -103,16 +120,16 @@
         set: localstore.set.bind(this, 'transport-after')
       },
       include_classes: {
-        get: localstore.get.bind(this, 'include-classes'),
-        set: localstore.set.bind(this, 'include-classes')
+        get: localstore.getJSON.bind(this, 'include-classes'),
+        set: localstore.setJSON.bind(this, 'include-classes')
       },
       include_modules: {
-        get: localstore.get.bind(this, 'include-modules'),
-        set: localstore.set.bind(this, 'include-modules')
+        get: localstore.getJSON.bind(this, 'include-modules'),
+        set: localstore.setJSON.bind(this, 'include-modules')
       },
       exclude_modules: {
-        get: localstore.get.bind(this, 'exclude-modules'),
-        set: localstore.set.bind(this, 'exclude-modules')
+        get: localstore.getJSON.bind(this, 'exclude-modules'),
+        set: localstore.setJSON.bind(this, 'exclude-modules')
       },
     }
   }

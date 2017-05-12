@@ -16,6 +16,7 @@
 <script>
   import moment from 'moment'
   import localstore from '../localstore'
+  import bfhcockpitApi from '../bfhcockpit_api'
 
   export default {
     name: 'cockpit',
@@ -39,19 +40,15 @@
         this.time = Date.now()
       }, 1000 * 15)
 
-      let include_classes = localstore.get('include-classes')
-      let include_modules = localstore.get('include-modules')
-      let exclude_modules = localstore.get('exclude-modules')
+      const filter = {
+        include_classes: (localstore.getJSON('include-classes') || []).map(cls => cls.classname).join(','),
+        include_modules: (localstore.getJSON('include-modules') || []).map(cls => cls.courseident).join(','),
+        exclude_modules: (localstore.getJSON('exclude-modules') || []).map(cls => cls.courseident).join(','),
+      }
 
-      if (!include_classes && !include_modules)
-        include_classes = 'I2q';
-
-      let query = '?' + 'include_classes=' + include_classes + '&include_modules=' + include_modules + '&exclude_moduels='+exclude_modules
-      query = encodeURI(query)
-
-      this.$http.get(Laravel.api + '/lessons' + query).then(response => {
-        this.lessons = response.body.data
-        this.lessons = this.lessons || []
+      bfhcockpitApi.lessonsFiltered(filter)
+        .then(lessons => {
+        this.lessons = lessons
         // sort lessons by day and starttime
         this.lessons.sort(function (a, b) {
           if (a.dayofweek < b.dayofweek || a.dayofweek === b.dayofweek && a.start < b.start ){
