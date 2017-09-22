@@ -34,7 +34,7 @@ export default {
     const resource = 'lessons'
 
     if (!options.include_classes && !options.include_modules) {
-      options.include_classes = 'I2q'
+      options.include_classes = 'I3q'
     }
 
     let query = '?' + 'include_classes=' + options.include_classes + '&include_modules=' + options.include_modules + '&exclude_modules=' + options.exclude_modules
