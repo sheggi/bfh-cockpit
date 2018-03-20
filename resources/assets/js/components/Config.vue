@@ -24,11 +24,11 @@
                         </div>
                         <div class="form-group">
                             <label>Einzelne Module hinzufügen</label>
-                            <multiselect v-model="include_modules" :options="modules" track-by="courseident" label="name" :custom-label="customModulLabel" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
+                            <multiselect v-model="include_modules" :options="modules" track-by="courseident" label="display" :custom-label="customModulLabel" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
                         </div>
                         <div class="form-group">
                             <label>Einzelne Module ausschliessen</label>
-                            <multiselect v-model="exclude_modules" :options="modules" track-by="courseident" label="name" :custom-label="customModulLabel" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
+                            <multiselect v-model="exclude_modules" :options="modules" track-by="courseident" label="display" :custom-label="customModulLabel" :multiple="true" :close-on-select="false" :hide-selected="true"></multiselect>
                         </div>
                     </div>
                 </div>
@@ -89,6 +89,9 @@
       })
 
       bfhcockpitApi.modules().then(modules => {
+        modules.forEach(function(module){
+          module.display = module.courseident + ' - ' + module.shortname + ' - ' + module.name;
+        })
         this.modules = modules
         this.$forceUpdate()
       })
