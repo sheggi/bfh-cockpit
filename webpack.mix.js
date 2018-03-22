@@ -15,5 +15,6 @@ const { mix } = require('laravel-mix')
    .sass('resources/assets/sass/app.scss', 'public/css')
 
 if (mix.config.inProduction) {
-  mix.version()
+  //disabled versioning because it doesn't work in production
+  //mix.version()
 }
