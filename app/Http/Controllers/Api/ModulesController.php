@@ -14,7 +14,7 @@ class ModulesController extends Controller
      */
     public function index()
     {
-        $modules = DB::table('lessons')->select('courseident', 'shortname', 'name')->groupBy('courseident')->get();
+        $modules = DB::table('lessons')->select('id', 'courseident', 'shortname', 'name')->groupBy('courseident')->get();
         return ['data' => $modules];
     }
 
@@ -27,7 +27,7 @@ class ModulesController extends Controller
      */
     public function show($id)
     {
-        $modules = DB::table('lessons')->select('courseident', 'shortname', 'name')->where('shortname', $id)->groupBy('courseident')->get();
+        $modules = DB::table('lessons')->select('id', 'courseident', 'shortname', 'name')->where('shortname', $id)->groupBy('courseident')->get();
         return ['data' => $modules];
     }
 }

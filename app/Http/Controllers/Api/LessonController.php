@@ -19,18 +19,11 @@ class LessonController extends Controller
             $includeClasses = explode(',', $request->get('include_classes'));
             $includeModules = explode(',', $request->get('include_modules'));
             $excludeModules = explode(',', $request->get('exclude_modules'));
-            $data = [];
-            foreach ($includeClasses as $cl) {
-                $data = array_merge($data, Lesson::where('classname', $cl)->get()->toArray());
-            }
-            foreach ($includeModules as $mod) {
-                $data = array_merge($data, Lesson::where('courseident', $mod)->get()->toArray());
-            }
-
-            $data = array_values(array_filter($data,
-                function ($module) use ($excludeModules) {
-                    return !in_array($module['courseident'], $excludeModules);
-                }));
+            $data = Lesson::where(function($query) use($includeClasses, $includeModules){
+                $query->whereIn('classname', $includeClasses)
+                  ->orWhereIn('id', $includeModules)
+                  ->orWhereIn('courseident', $includeModules);
+            })->whereNotIn('id', $excludeModules)->whereNotIn('courseident', $excludeModules)->get()->toArray();
 
             return response()->json(['data' => $data]);
         }

@@ -33,7 +33,7 @@ class WebserviceController extends Controller
             } else {
                 return abort(500);
             }
-            return response()->json(Lesson::all());
+            return response()->json(Lesson::selectRaw('count(*)')->get());
         }
 
         return abort(404);
