@@ -7,7 +7,7 @@
                         <h3 class="panel-title">Lokale Einstellungen</h3>
                     </div>
                     <div class="panel-body">
-                        <p>Die Einstellungen werden im LocalStore gespeichert</p>
+                        <p>Die Einstellungen werden sofort im Browser gespeichert. Zur Zeit werden die Einstellungen nicht zwischen deinen Browsern synchronisiert</p>
                         <div class="alert alert-danger" v-if="!feature_localstore">LocalStore wird im Browser nicht unterstützt!</div>
                     </div>
                 </div>
