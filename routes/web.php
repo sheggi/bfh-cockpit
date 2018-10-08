@@ -11,26 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-});
-Route::get('/config', function () {
-    return view('config');
-});
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('timetable');
+Route::get('/config','HomeController@config')->name('configuration');
 
-Route::get('/setup', function () {
-    if (Config::get('app.env') === 'staging') {
-        return response()->json([
-//            'optimize' => Artisan::call('optimize'), // FIXME: can't be used without proc_open
-//            'route:cache' => Artisan::call('route:cache'), // FIXME: LogicException api/v0/user not serializable because of Closure
-            'cache:clear' => Artisan::call('cache:clear'),
-            'migrate' => Artisan::call('migrate')
-            ]);
-    } else {
-        abort(404);
-    }
+Route::middleware('auth')->group(function (){
+    Route::get('/home', 'HomeController@home');
+    Route::get('/setup', 'HomeController@setup');
 });

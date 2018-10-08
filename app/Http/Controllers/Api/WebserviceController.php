@@ -15,7 +15,7 @@ class WebserviceController extends Controller
      * @return Response
      */
     public function fetch(){
-        if (Auth::id() === 1) {
+        if (auth()->user()->isAdmin()) {
             $url = 'https://mybfh.bfh.ch/webservice/?action=get_tt_entries&flat&_dc=' . time();
             $fetched = json_decode(file_get_contents($url), true);
 
@@ -31,11 +31,11 @@ class WebserviceController extends Controller
                 }
 
             } else {
-                header('HTTP/1.0 500 Internal Server Error');
-                exit('There went something wrong.');
+                return abort(500);
             }
+            return response()->json(Lesson::all());
         }
 
-        return response()->json(Lesson::all());
+        return abort(404);
     }
 }

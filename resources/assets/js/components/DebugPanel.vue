@@ -25,7 +25,7 @@ First Lesson:
 
     data: function () {
       return {
-        authenticated: Laravel.authenticated
+        authenticated: Laravel.admin
       }
     },
 

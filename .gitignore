@@ -9,3 +9,5 @@ Homestead.yaml
 .env
 /public/mix-manifest.json
 /_backup
+.phpstorm.meta.php
+_ide_helper.php
