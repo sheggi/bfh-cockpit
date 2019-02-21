@@ -1,11 +1,11 @@
 /* global localStorage */
 const prefix = 'bfhcockpit:'
 
-function supported () {
+function supported() {
   return typeof localStorage !== 'undefined'
 }
 
-export default  {
+export default {
   set: function (key, value) {
     if (supported()) {
       localStorage.setItem(prefix + key, value)

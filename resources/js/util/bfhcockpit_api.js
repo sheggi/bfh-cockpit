@@ -1,5 +1,5 @@
 /* global Laravel */
-import Vue from 'vue'
+import axios from 'axios'
 
 const apiUrl = Laravel.api
 
@@ -12,12 +12,10 @@ export default {
    */
   lessons: function () {
     const resource = 'lessons'
-    return Vue.http({
-      method: 'GET',
-      url: apiUrl + '/' + resource
-    }).then(response => {
-      return response.body.data || []
-    })
+    return axios.get(apiUrl + '/' + resource)
+      .then(response => {
+        return response.data.data || []
+      })
   },
 
   /**
@@ -42,12 +40,10 @@ export default {
 
     console.info(apiUrl + '/' + resource + query)
 
-    return Vue.http({
-      method: 'GET',
-      url: apiUrl + '/' + resource + query
-    }).then(response => {
-      return response.body.data || []
-    })
+    return axios.get(apiUrl + '/' + resource + query)
+      .then(response => {
+        return response.data.data || []
+      })
   },
 
   /**
@@ -58,12 +54,10 @@ export default {
   classes: function () {
     const resource = 'classes'
 
-    return Vue.http({
-      method: 'GET',
-      url: apiUrl + '/' + resource
-    }).then(response => {
-      return response.body.data || []
-    })
+    return axios.get(apiUrl + '/' + resource)
+      .then(response => {
+        return response.data.data || []
+      })
   },
 
   /**
@@ -74,12 +68,10 @@ export default {
   modules: function () {
     const resource = 'modules'
 
-    return Vue.http({
-      method: 'GET',
-      url: apiUrl + '/' + resource
-    }).then(response => {
-      return response.body.data || []
-    })
+    return axios.get(apiUrl + '/' + resource)
+      .then(response => {
+        return response.data.data || []
+      })
   },
 
   /**
@@ -91,11 +83,9 @@ export default {
   modulesByShortname: function (shortname) {
     const resource = 'modules'
 
-    return Vue.http({
-      method: 'GET',
-      url: apiUrl + '/' + resource + '/' + shortname
-    }).then(response => {
-      return response.body.data || []
-    })
+    return axios.get(apiUrl + '/' + resource + '/' + shortname)
+      .then(response => {
+        return response.data.data || []
+      })
   }
 }

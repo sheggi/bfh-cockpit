@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <div v-for="day in days" v-show="lesson_by_day[day] && lesson_by_day[day].length">
-            <p class="lead">{{moment().day(day).calendar(null, day_formatting)}}</p>
-            <lesson-panel v-for="lesson in lesson_by_day[day]" :lesson="lesson" :time="time"></lesson-panel>
-        </div>
+  <div class="mb-4">
+    <div v-for="(day, index) in days" :key="index" v-show="lesson_by_day[day] && lesson_by_day[day].length">
+      <p class="lead">{{moment().day(day).calendar(null, day_formatting)}}</p>
+      <lesson-panel v-for="lesson in lesson_by_day[day]" :key="lesson.id" :lesson="lesson" :time="time"></lesson-panel>
     </div>
+  </div>
 </template>
 
 
@@ -12,20 +12,20 @@
   import moment from 'moment'
 
   export default {
-    name: 'previous-days-panel',
+    name: 'next-days-panel',
 
     props: ['lessons', 'time'],
 
     data: function () {
       return {
         day_formatting: {
-        sameDay: '[Today]',
-        nextDay: '[Tomorrow]',
-        nextWeek: 'dddd',
-        lastDay: '[Yesterday]',
-        lastWeek: '[Last] dddd',
-        sameElse: 'DD/MM/YYYY'
-      }
+          sameDay: '[Today]',
+          nextDay: '[Tomorrow]',
+          nextWeek: 'dddd',
+          lastDay: '[Yesterday]',
+          lastWeek: '[Last] dddd',
+          sameElse: 'DD/MM/YYYY'
+        }
       }
     },
 
@@ -40,8 +40,7 @@
       },
       days: function () {
         const days = [];
-        for (let i = 0; i < moment(this.time).day(); i++)
-        {
+        for (let i = moment(this.time).day() + 1; i <= 6; i++) {
           days.push(i);
         }
         return days
