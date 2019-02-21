@@ -85,7 +85,13 @@
         feature_localstore: localstore.supported(),
         transport_hide: localstore.get('transport-hide') === 'true',
         classes: [],
-        modules: []
+        modules: [],
+        transport_before:  localstore.get('transport-before'),
+        transport_here: localstore.get('transport-here'),
+        transport_after: localstore.get('transport-after'),
+        include_classes: localstore.getJSON('include-classes'),
+        include_modules:  localstore.getJSON('include-modules'),
+        exclude_modules: localstore.getJSON('exclude-modules'),
       }
     },
 
@@ -116,30 +122,24 @@
       }
     },
 
-    computed: {
-      transport_before: {
-        get: localstore.get.bind(this, 'transport-before'),
-        set: localstore.set.bind(this, 'transport-before')
+    watch: {
+      transport_before(value) {
+        localstore.set('transport-before', value)
       },
-      transport_here: {
-        get: localstore.get.bind(this, 'transport-here'),
-        set: localstore.set.bind(this, 'transport-here')
+      transport_here(value) {
+        localstore.set('transport-here', value)
       },
-      transport_after: {
-        get: localstore.get.bind(this, 'transport-after'),
-        set: localstore.set.bind(this, 'transport-after')
+      transport_after(value) {
+        localstore.set('transport-after', value)
       },
-      include_classes: {
-        get: localstore.getJSON.bind(this, 'include-classes'),
-        set: localstore.setJSON.bind(this, 'include-classes')
+      include_classes(value) {
+        localstore.setJSON('include-classes', value)
       },
-      include_modules: {
-        get: localstore.getJSON.bind(this, 'include-modules'),
-        set: localstore.setJSON.bind(this, 'include-modules')
+      include_modules(value) {
+        localstore.setJSON('include-modules', value)
       },
-      exclude_modules: {
-        get: localstore.getJSON.bind(this, 'exclude-modules'),
-        set: localstore.setJSON.bind(this, 'exclude-modules')
+      exclude_modules(value) {
+        localstore.setJSON('exclude-modules', value)
       },
     }
   }

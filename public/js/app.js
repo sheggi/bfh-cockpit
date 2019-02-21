@@ -1938,7 +1938,13 @@ __webpack_require__.r(__webpack_exports__);
       feature_localstore: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].supported(),
       transport_hide: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].get('transport-hide') === 'true',
       classes: [],
-      modules: []
+      modules: [],
+      transport_before: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].get('transport-before'),
+      transport_here: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].get('transport-here'),
+      transport_after: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].get('transport-after'),
+      include_classes: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].getJSON('include-classes'),
+      include_modules: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].getJSON('include-modules'),
+      exclude_modules: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].getJSON('exclude-modules')
     };
   },
   created: function created() {
@@ -1968,30 +1974,24 @@ __webpack_require__.r(__webpack_exports__);
       return "".concat(obj.courseident, " \u2013 ").concat(obj.shortname, " - ").concat(obj.name);
     }
   },
-  computed: {
-    transport_before: {
-      get: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].get.bind(undefined, 'transport-before'),
-      set: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].set.bind(undefined, 'transport-before')
+  watch: {
+    transport_before: function transport_before(value) {
+      _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].set('transport-before', value);
     },
-    transport_here: {
-      get: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].get.bind(undefined, 'transport-here'),
-      set: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].set.bind(undefined, 'transport-here')
+    transport_here: function transport_here(value) {
+      _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].set('transport-here', value);
     },
-    transport_after: {
-      get: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].get.bind(undefined, 'transport-after'),
-      set: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].set.bind(undefined, 'transport-after')
+    transport_after: function transport_after(value) {
+      _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].set('transport-after', value);
     },
-    include_classes: {
-      get: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].getJSON.bind(undefined, 'include-classes'),
-      set: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].setJSON.bind(undefined, 'include-classes')
+    include_classes: function include_classes(value) {
+      _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].setJSON('include-classes', value);
     },
-    include_modules: {
-      get: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].getJSON.bind(undefined, 'include-modules'),
-      set: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].setJSON.bind(undefined, 'include-modules')
+    include_modules: function include_modules(value) {
+      _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].setJSON('include-modules', value);
     },
-    exclude_modules: {
-      get: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].getJSON.bind(undefined, 'exclude-modules'),
-      set: _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].setJSON.bind(undefined, 'exclude-modules')
+    exclude_modules: function exclude_modules(value) {
+      _util_localstore__WEBPACK_IMPORTED_MODULE_0__["default"].setJSON('exclude-modules', value);
     }
   }
 });
