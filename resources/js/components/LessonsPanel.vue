@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <lesson-panel v-for="lesson in lessons" :lesson="lesson" :time="time"></lesson-panel>
-    </div>
+  <div>
+    <lesson-panel v-for="lesson in lessons" :key="lesson.id" :lesson="lesson" :time="time"></lesson-panel>
+  </div>
 </template>
 
 
@@ -14,8 +14,7 @@
     props: ['lessons', 'time'],
 
     data: function () {
-      return {
-      }
+      return {}
     },
 
     methods: {

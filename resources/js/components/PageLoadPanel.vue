@@ -1,10 +1,10 @@
 <template>
-    <div v-show="loading">
-        <p class="lead">Loading data... Please wait. <i></i></p>
-        <div class="progress progress-striped active page-progress-bar">
-            <div class="progress-bar" style="width: 100%;"></div>
-        </div>
+  <div v-show="loading" class="mb-4">
+    <p class="lead">Loading data... Please wait. <i></i></p>
+    <div class="progress progress-striped active page-progress-bar">
+      <div class="progress-bar" style="width: 100%;"></div>
     </div>
+  </div>
 </template>
 
 
@@ -17,9 +17,7 @@
     props: ['lessons', 'time'],
 
     data: function () {
-      return {
-
-      }
+      return {}
     },
 
     computed: {

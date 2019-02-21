@@ -1,16 +1,16 @@
 <template>
-    <div>
-        <p class="lead" id="today">{{moment(this.time).calendar(null, day_formatting)}}</p>
-        <transport-panel :from="before" :to="here"></transport-panel>
-        <lesson-panel v-for="lesson in today_lessons" :lesson="lesson" :time="time"></lesson-panel>
-        <transport-panel :from="here" :to="after"></transport-panel>
-    </div>
+  <div class="mb-4">
+    <p class="lead" id="today">{{moment(this.time).calendar(null, day_formatting)}}</p>
+    <transport-panel :from="before" :to="here"></transport-panel>
+    <lesson-panel v-for="lesson in today_lessons" :key="lesson.id" :lesson="lesson" :time="time"></lesson-panel>
+    <transport-panel :from="here" :to="after"></transport-panel>
+  </div>
 </template>
 
 
 <script>
   import moment from 'moment'
-  import localstore from '../localstore'
+  import localstore from '../util/localstore'
 
   export default {
     name: 'today-panel',

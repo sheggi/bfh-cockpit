@@ -1,4 +1,4 @@
-const { mix } = require('laravel-mix')
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,10 +11,5 @@ const { mix } = require('laravel-mix')
  |
  */
 
-;mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css')
-
-if (mix.config.inProduction) {
-  //disabled versioning because it doesn't work in production
-  //mix.version()
-}
+mix.js('resources/js/app.js', 'public/js')
+  .sass('resources/sass/app.scss', 'public/css');
