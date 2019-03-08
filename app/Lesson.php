@@ -52,6 +52,9 @@ class Lesson extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'courseident', 'shortname', 'professor', 'classname', 'dayofweek', 'start', 'end', 'place', 'room', 'links'];
+    protected $fillable = ['name', 'courseident', 'shortname', 'professor', 'classname', 'dayofweek', 'start', 'end', 'place', 'room'];
 
+    public function links(){
+        return $this->hasMany(Link::class);
+    }
 }

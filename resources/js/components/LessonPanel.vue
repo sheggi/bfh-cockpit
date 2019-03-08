@@ -4,33 +4,36 @@
   <div class="card lesson-panel mb-4" v-bind:id="isCurrent?'now':''">
     <div class="card-header" @click="toggle()">
       <div class="row">
-        <div class="col-xs-1">
-          <span class="start">{{moment(lesson.start,'HH:mm:ss').format('HH:mm')}}</span><br>
-          <span class="end">{{moment(lesson.end,'HH:mm:ss').format('HH:mm')}}</span>
+        <div class="col-2">
+          <span class="start">{{moment(lesson.start,'HH:mm:ss').format('HH:mm')}}</span>
         </div>
-        <div class="col-xs-2">
-          <h3 class="card-title center-line pl-4">{{lesson.shortname}}</h3>
-        </div>
-        <div class="col-xs-7">
-          <h3 class="card-title center-line">{{lesson.name}}</h3>
-        </div>
-        <div class="col-xs-2">
-          <h3 class="pull-right card-title center-line" v-show="isPassed">
+        <div class="col">
+          <span class="text-lg">{{lesson.shortname}}</span>
+          <span class="text-secondary">{{lesson.name}}</span>
+          <span class="pull-right" v-show="isPassed">
             <div class="label label-success"><i class="glyphicon glyphicon-ok"></i></div>
-          </h3>
-          <h3 class="pull-right card-title center-line" v-show="isCurrent || isScheduled">{{lesson.room}}</h3>
+          </span>
         </div>
       </div>
-      <div class="progress" v-show="isCurrent">
+      <div class="row">
+        <div class="col col-2">
+          <span class="end">{{moment(lesson.end,'HH:mm:ss').format('HH:mm')}}</span>
+        </div>
+        <div class="col">
+          <span class="text-secondary">{{lesson.place}} {{lesson.room}}</span>
+        </div>
+      </div>
+      <div class="progress mt-2" v-show="isCurrent">
         <div class="progress-bar" role="progressbar" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100"
              v-bind:style="{width:progress+'%'}"></div>
       </div>
     </div>
     <div class="card-body card-collapse" v-show="isOpen || isCurrent">
+      <div v-if="!lesson.links.length">Keine Links vorhanden.</div>
+      <div v-if="lesson.links.length">Links:</div>
       <ul>
-        <li><a :href="moduleLink">{{lesson.courseident}} Modulbeschreibung</a></li>
+        <li v-for="link in lesson.links"><a :href="link.url">{{link.title}}</a></li>
       </ul>
-      <markdown v-model="lesson.links"></markdown>
     </div>
   </div>
 </template>
@@ -82,9 +85,6 @@
       isPassed() {
         return this.endTime === null ? false : this.endTime.isBefore(this.time)
       },
-      moduleLink() {
-        return 'https://www.ti.bfh.ch/fileadmin/modules/' + this.lesson.courseident.replace(/[a-z]*$/i, '') + '-de.xml'
-      },
       progress() {
         const full = this.endTime.valueOf() - this.startTime.valueOf();
         const is = this.time - this.startTime.valueOf();
@@ -113,4 +113,11 @@
     margin-top: 12px;
   }
 
+  .text-lg {
+    font-size: 150%;
+  }
+
+  .card-body li {
+    list-style: none;
+  }
 </style>

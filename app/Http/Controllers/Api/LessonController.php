@@ -19,7 +19,8 @@ class LessonController extends Controller
             $includeClasses = explode(',', $request->get('include_classes'));
             $includeModules = explode(',', $request->get('include_modules'));
             $excludeModules = explode(',', $request->get('exclude_modules'));
-            $data = Lesson::where(function($query) use($includeClasses, $includeModules){
+            $data = Lesson::with('links')->
+                where(function($query) use($includeClasses, $includeModules){
                 $query->whereIn('classname', $includeClasses)
                   ->orWhereIn('id', $includeModules)
                   ->orWhereIn('courseident', $includeModules);

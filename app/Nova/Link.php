@@ -2,26 +2,25 @@
 
 namespace App\Nova;
 
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 
-class Lesson extends Resource
+class Link extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Lesson::class;
+    public static $model = \App\Link::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'name';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -29,13 +28,9 @@ class Lesson extends Resource
      * @var array
      */
     public static $search = [
-      'id',
-      'name',
-      'courseident',
-      'shortname',
-      'professor',
-      'classname',
-      'place',
+        'id',
+        'title',
+        'url',
     ];
 
     /**
@@ -44,31 +39,18 @@ class Lesson extends Resource
      * @param  \Illuminate\Http\Request $request
      * @return array
      */
-    public function fields(Request $request) {
+    public function fields(Request $request)
+    {
         return [
-          ID::make()->sortable(),
+            ID::make()->sortable(),
 
-          Text::make('Name')
-            ->sortable()
-            ->rules('required', 'max:255'),
+            Text::make('Title')
+                ->sortable()
+                ->rules('required', 'max:255'),
 
-          Text::make('Shortname')
-            ->sortable()
-            ->rules('required', 'max:255'),
-
-          Text::make('Courseident')
-            ->sortable()
-            ->rules('required', 'max:255'),
-
-          Text::make('Professor')
-            ->sortable()
-            ->rules('required', 'max:255'),
-
-          Text::make('Classname')
-            ->sortable()
-            ->rules('required', 'max:255'),
-
-          HasMany::make('Links'),
+            Text::make('Url')
+                ->sortable()
+                ->rules('required', 'max:255'),
         ];
     }
 
@@ -78,7 +60,8 @@ class Lesson extends Resource
      * @param  \Illuminate\Http\Request $request
      * @return array
      */
-    public function cards(Request $request) {
+    public function cards(Request $request)
+    {
         return [];
     }
 
@@ -88,7 +71,8 @@ class Lesson extends Resource
      * @param  \Illuminate\Http\Request $request
      * @return array
      */
-    public function filters(Request $request) {
+    public function filters(Request $request)
+    {
         return [];
     }
 
@@ -98,7 +82,8 @@ class Lesson extends Resource
      * @param  \Illuminate\Http\Request $request
      * @return array
      */
-    public function lenses(Request $request) {
+    public function lenses(Request $request)
+    {
         return [];
     }
 
@@ -108,7 +93,8 @@ class Lesson extends Resource
      * @param  \Illuminate\Http\Request $request
      * @return array
      */
-    public function actions(Request $request) {
+    public function actions(Request $request)
+    {
         return [];
     }
 }

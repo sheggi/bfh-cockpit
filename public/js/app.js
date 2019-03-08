@@ -2093,6 +2093,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'lesson-panel',
@@ -2130,9 +2133,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     isPassed: function isPassed() {
       return this.endTime === null ? false : this.endTime.isBefore(this.time);
-    },
-    moduleLink: function moduleLink() {
-      return 'https://www.ti.bfh.ch/fileadmin/modules/' + this.lesson.courseident.replace(/[a-z]*$/i, '') + '-de.xml';
     },
     progress: function progress() {
       var full = this.endTime.valueOf() - this.startTime.valueOf();
@@ -6502,7 +6502,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nh3.card-title.center-line {\n  margin-top: 12px;\n}\n\n", ""]);
+exports.push([module.i, "\nh3.card-title.center-line {\n  margin-top: 12px;\n}\n.text-lg {\n  font-size: 150%;\n}\n.card-body li {\n  list-style: none;\n}\n", ""]);
 
 // exports
 
@@ -57386,38 +57386,27 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-xs-1" }, [
+            _c("div", { staticClass: "col-2" }, [
               _c("span", { staticClass: "start" }, [
                 _vm._v(
                   _vm._s(
                     _vm.moment(_vm.lesson.start, "HH:mm:ss").format("HH:mm")
                   )
                 )
-              ]),
-              _c("br"),
-              _vm._v(" "),
-              _c("span", { staticClass: "end" }, [
-                _vm._v(
-                  _vm._s(_vm.moment(_vm.lesson.end, "HH:mm:ss").format("HH:mm"))
-                )
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-xs-2" }, [
-              _c("h3", { staticClass: "card-title center-line pl-4" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("span", { staticClass: "text-lg" }, [
                 _vm._v(_vm._s(_vm.lesson.shortname))
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-xs-7" }, [
-              _c("h3", { staticClass: "card-title center-line" }, [
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-secondary" }, [
                 _vm._v(_vm._s(_vm.lesson.name))
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-xs-2" }, [
+              ]),
+              _vm._v(" "),
               _c(
-                "h3",
+                "span",
                 {
                   directives: [
                     {
@@ -57427,26 +57416,26 @@ var render = function() {
                       expression: "isPassed"
                     }
                   ],
-                  staticClass: "pull-right card-title center-line"
+                  staticClass: "pull-right"
                 },
                 [_vm._m(0)]
-              ),
-              _vm._v(" "),
-              _c(
-                "h3",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.isCurrent || _vm.isScheduled,
-                      expression: "isCurrent || isScheduled"
-                    }
-                  ],
-                  staticClass: "pull-right card-title center-line"
-                },
-                [_vm._v(_vm._s(_vm.lesson.room))]
               )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col col-2" }, [
+              _c("span", { staticClass: "end" }, [
+                _vm._v(
+                  _vm._s(_vm.moment(_vm.lesson.end, "HH:mm:ss").format("HH:mm"))
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c("span", { staticClass: "text-secondary" }, [
+                _vm._v(_vm._s(_vm.lesson.place) + " " + _vm._s(_vm.lesson.room))
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -57461,7 +57450,7 @@ var render = function() {
                   expression: "isCurrent"
                 }
               ],
-              staticClass: "progress"
+              staticClass: "progress mt-2"
             },
             [
               _c("div", {
@@ -57493,25 +57482,24 @@ var render = function() {
           staticClass: "card-body card-collapse"
         },
         [
-          _c("ul", [
-            _c("li", [
-              _c("a", { attrs: { href: _vm.moduleLink } }, [
-                _vm._v(_vm._s(_vm.lesson.courseident) + " Modulbeschreibung")
-              ])
-            ])
-          ]),
+          !_vm.lesson.links.length
+            ? _c("div", [_vm._v("Keine Links vorhanden.")])
+            : _vm._e(),
           _vm._v(" "),
-          _c("markdown", {
-            model: {
-              value: _vm.lesson.links,
-              callback: function($$v) {
-                _vm.$set(_vm.lesson, "links", $$v)
-              },
-              expression: "lesson.links"
-            }
-          })
-        ],
-        1
+          _vm.lesson.links.length ? _c("div", [_vm._v("Links:")]) : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "ul",
+            _vm._l(_vm.lesson.links, function(link) {
+              return _c("li", [
+                _c("a", { attrs: { href: link.url } }, [
+                  _vm._v(_vm._s(link.title))
+                ])
+              ])
+            }),
+            0
+          )
+        ]
       )
     ]
   )
@@ -71059,8 +71047,8 @@ var api_url = location.protocol + '//transport.opendata.ch/v1';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\development\bfh-cockpit\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\development\bfh-cockpit\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\development\bfh-cockpit\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\development\bfh-cockpit\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
