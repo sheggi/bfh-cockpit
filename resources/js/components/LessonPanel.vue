@@ -29,9 +29,10 @@
       </div>
     </div>
     <div class="card-body card-collapse" v-show="isOpen || isCurrent">
-      <div v-if="!lesson.links.length">Keine Links vorhanden.</div>
-      <div v-if="lesson.links.length">Links:</div>
+      <div v-if="!(lesson.links.length || lesson.courseident)">Keine Links vorhanden.</div>
+      <div v-if="lesson.links.length || lesson.courseident">Links:</div>
       <ul>
+        <li><a :href="moduleLink" target="_blank">{{lesson.courseident}} Modulbeschreibung</a></li>
         <li v-for="link in lesson.links"><a :href="link.url">{{link.title}}</a></li>
       </ul>
     </div>
@@ -89,6 +90,9 @@
         const full = this.endTime.valueOf() - this.startTime.valueOf();
         const is = this.time - this.startTime.valueOf();
         return (is < 0) ? 0 : (is > full) ? 100 : parseInt(is / full * 100)
+      },
+      moduleLink() {
+        return 'https://content.bfh.ch/fileadmin/ti/modules/' + this.lesson.courseident.replace(/[a-z]*$/i, '') + '-de.xml'
       },
       linkCompiled() {
         return marked()

@@ -2096,6 +2096,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'lesson-panel',
@@ -2138,6 +2139,9 @@ __webpack_require__.r(__webpack_exports__);
       var full = this.endTime.valueOf() - this.startTime.valueOf();
       var is = this.time - this.startTime.valueOf();
       return is < 0 ? 0 : is > full ? 100 : parseInt(is / full * 100);
+    },
+    moduleLink: function moduleLink() {
+      return 'https://content.bfh.ch/fileadmin/ti/modules/' + this.lesson.courseident.replace(/[a-z]*$/i, '') + '-de.xml';
     },
     linkCompiled: function linkCompiled() {
       return marked();
@@ -57482,22 +57486,32 @@ var render = function() {
           staticClass: "card-body card-collapse"
         },
         [
-          !_vm.lesson.links.length
+          !(_vm.lesson.links.length || _vm.lesson.courseident)
             ? _c("div", [_vm._v("Keine Links vorhanden.")])
             : _vm._e(),
           _vm._v(" "),
-          _vm.lesson.links.length ? _c("div", [_vm._v("Links:")]) : _vm._e(),
+          _vm.lesson.links.length || _vm.lesson.courseident
+            ? _c("div", [_vm._v("Links:")])
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "ul",
-            _vm._l(_vm.lesson.links, function(link) {
-              return _c("li", [
-                _c("a", { attrs: { href: link.url } }, [
-                  _vm._v(_vm._s(link.title))
+            [
+              _c("li", [
+                _c("a", { attrs: { href: _vm.moduleLink, target: "_blank" } }, [
+                  _vm._v(_vm._s(_vm.lesson.courseident) + " Modulbeschreibung")
                 ])
-              ])
-            }),
-            0
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.lesson.links, function(link) {
+                return _c("li", [
+                  _c("a", { attrs: { href: link.url } }, [
+                    _vm._v(_vm._s(link.title))
+                  ])
+                ])
+              })
+            ],
+            2
           )
         ]
       )
