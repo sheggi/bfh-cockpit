@@ -33,7 +33,7 @@
       <div v-if="lesson.links.length || lesson.courseident">Links:</div>
       <ul>
         <li><a :href="moduleLink" target="_blank">{{lesson.courseident}} Modulbeschreibung</a></li>
-        <li v-for="link in lesson.links"><a :href="link.url">{{link.title}}</a></li>
+        <li v-for="link in lesson.links"><a :href="link.url" target="_blank">{{link.title}}</a></li>
       </ul>
     </div>
   </div>
