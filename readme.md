@@ -1,7 +1,7 @@
 # BFH Cockpit
 
 Simpler Asisten für während dem Studium and der BFH.
-Über Panels werden werden nützliche Informationen übersichtlich im Cockpit angezeigt
+Über Panels werden nützliche Informationen übersichtlich im Cockpit angezeigt
   
 ## Features
 
